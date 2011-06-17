@@ -76,9 +76,4 @@ class Hamming
   end
 end
 
-ham = Hamming.new
-puts ham
 
-0.upto(15) do | i |
-	puts i.to_s(2) + "i donne " + ham.encodeQuartet(i).to_s(2) + " et en decodé : " + ham.decodeQuartet(ham.encodeQuartet(i)).to_s(2)
-end
