@@ -60,11 +60,15 @@ class Hamming
   end
 
   def encodeUnsignedByte(byteToEncode)
-    
+
+    quartets = unsignedByteToQuartets(byteToEncode)
+    quartets.map! {|i| encodeQuartet(i)}
+    quartets
   end
 
-  def decodeUnsignedByte(byteToEncode)
-    
+  def decodeUnsignedBytes(byteToEncode)
+    quartets = byteToEncode.map {|i| decodeQuartet(i)}
+    retvalue = quartetsToByte(quartets)
   end
 
   def unsignedByteToQuartets(byteToConvert)
@@ -77,7 +81,7 @@ class Hamming
   def quartetsToByte(quartetsToConvert)
     value = quartetsToConvert[1] | (quartetsToConvert[0] << 4)
     value
-  end  
+  end
 
   #Decode une chaine de caractére contenant des 0 et des 1
   def encodeQuartet (quartetToEnccode)
@@ -89,4 +93,3 @@ class Hamming
 	@matriceDecodage[octetToDecode]    
   end
 end
-

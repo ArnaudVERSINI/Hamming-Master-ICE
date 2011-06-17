@@ -12,11 +12,11 @@ class HammingTest < Test::Unit::TestCase
   def test_encodage_decodage_unsigned_byte
     ham = Hamming.new
     0.upto(255) do | i |
-      assert_equal(i, ham.encodeUnsignedByte(ham.decodeUnsignedByte(i)))
+      assert_equal(i, ham.decodeUnsignedBytes(ham.encodeUnsignedByte(i)))
     end
   end
 
-  def test_quartetToByte
+  def test_quartet_to_byte
     ham = Hamming.new
     0.upto(255) do | i |
       assert_equal(i, ham.quartetsToByte(ham.unsignedByteToQuartets(i)))
