@@ -1,6 +1,8 @@
 class Hamming
 
-  @matrice = [
+
+  def initialize()
+    @matrice = [
 	[1, 0, 0, 0],
 	[0, 1, 0, 0],
 	[0, 0, 1, 0],
@@ -25,10 +27,7 @@ class Hamming
 	0x6C,
 	0x1D,
 	0x0E,
-	0x7F 
-    ]
-
-  def init()
+	0x7F]
 
   end
   
@@ -47,6 +46,7 @@ class Hamming
 
   #Decode une chaine de caractére contenant des 0 et des 1
   def encodeQuartet (quartetToEnccode)
+	@matriceEncodage[quartetToEnccode]
   end
 
   #Decode une chaine de caractére contenant des 0 et des 1
@@ -55,4 +55,9 @@ class Hamming
   end
 end
 
-hamming = Hamming.new
+ham = Hamming.new
+puts ham
+
+0.upto(15) do | i |
+	puts "i donne " + ham.encodeQuartet(i).to_s()
+end
