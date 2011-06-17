@@ -2,4 +2,5 @@
 require "fileManager.rb"
 
 file = FileManager.new
-file.openFile()
+file.openFileAndDisplay()
+file.encodeToBinFromAscii()
