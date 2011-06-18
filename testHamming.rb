@@ -22,5 +22,10 @@ class HammingTest < Test::Unit::TestCase
       assert_equal(i, ham.quartetsToByte(ham.unsignedByteToQuartets(i)))
     end
   end
+
+  def test_encodage_decodage_str
+    ham = Hamming.new
+    assert_equal("toto", ham.decodeBinStr(ham.encodeBinStr("toto")))
+  end
 end
 

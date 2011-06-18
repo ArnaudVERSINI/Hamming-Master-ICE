@@ -1,6 +1,4 @@
 class Hamming
-
-
   def initialize()
     @matrice = [
 	[1, 0, 0, 0],
@@ -46,21 +44,19 @@ class Hamming
     0x0C, 0x09, 0x02, 0x0B, 0x0C, 0x0C, 0x0C, 0x0F,
     0x01, 0x01, 0x02, 0x01, 0x04, 0x01, 0x06, 0x0F,
     0x08, 0x01, 0x0A, 0x0F, 0x0C, 0x0F, 0x0F, 0x0F]
-
   end
   
   #Encode une chaine de caractére contenant des 0 et des 1
   def encodeBinStr (strToEncode)
-    
+    strToEncode.bytes.map{|i| encodeUnsignedByte(i)}.flatten.pack("c*")
   end
 
   #Decode une chaine de caractére contenant des 0 et des 1
   def decodeBinStr (strToDecode)
-    
+    strToDecode.bytes.each_slice(2).map{|i| decodeUnsignedBytes(i)}.pack("c*")
   end
 
   def encodeUnsignedByte(byteToEncode)
-
     quartets = unsignedByteToQuartets(byteToEncode)
     quartets.map! {|i| encodeQuartet(i)}
     quartets
@@ -72,24 +68,21 @@ class Hamming
   end
 
   def unsignedByteToQuartets(byteToConvert)
-    retValue = Array.new
-    retValue[0] = (byteToConvert >> 4) & 0x0F;
-    retValue[1] = byteToConvert & 0x0F;
-    retValue
-  end  
+    [(byteToConvert >> 4) & 0x0F, byteToConvert & 0x0F]
+  end
 
+  #Convertit deux quartets en un octet
   def quartetsToByte(quartetsToConvert)
-    value = quartetsToConvert[1] | (quartetsToConvert[0] << 4)
-    value
+    quartetsToConvert[1] | (quartetsToConvert[0] << 4)
   end
 
   #Decode une chaine de caractére contenant des 0 et des 1
   def encodeQuartet (quartetToEnccode)
-	@matriceEncodage[quartetToEnccode]
+    @matriceEncodage[quartetToEnccode]
   end
 
   #Decode une chaine de caractére contenant des 0 et des 1
   def decodeQuartet (octetToDecode)
-	@matriceDecodage[octetToDecode]    
+    @matriceDecodage[octetToDecode]    
   end
 end
