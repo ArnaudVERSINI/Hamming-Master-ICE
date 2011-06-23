@@ -1,4 +1,5 @@
 require "hamming"
+require "bruit"
 
 def help()
   puts "ruby COMMANDE fichier_entre fichier sortie"
@@ -12,8 +13,8 @@ if (ARGV.length != 3)
   exit 1;
 end
 
-file_input = File.new(ARGV[1] ,"r");
-file_output = File.new(ARGV[2], "w");
+file_input = File.new(ARGV[1] ,"rb");
+file_output = File.new(ARGV[2], "wb");
 puts "Fichiers ouverts"
 case (ARGV[0])
   when "ENCODE" then
@@ -28,6 +29,7 @@ case (ARGV[0])
       end
      end
   when "ERREUR" then
-    puts "PAS encore codé"
+   bruit = Bruit.new
+   file_input.bytes.each{|i| file_output.write([bruit.inserer_bruit(i)].pack("c*"))}
     
 end

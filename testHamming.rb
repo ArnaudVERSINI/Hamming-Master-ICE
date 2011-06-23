@@ -23,5 +23,19 @@ class HammingTest < Test::Unit::TestCase
   def test_encodage_decodage_str
     assert_equal("toto", decode_bin_str(encode_bin_str("toto")))
   end
+
+  def test_encodage_decodage_bruit
+    0.upto(15) do | i |
+      puts "Test sur " + i.to_s(2)
+      quartet_encode = encode_quartet(i)
+      masque = 1
+      8.times do 
+        octet_avec_erreur = quartet_encode ^ masque
+	puts "decodage de" + octet_avec_erreur.to_s(2)
+        assert_equal(i, decode_quartet(octet_avec_erreur))
+        masque = masque << 1
+      end
+    end
+end      
 end
 

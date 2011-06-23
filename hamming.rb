@@ -80,5 +80,8 @@ end
 
 #Decode une chaine de caractére contenant des 0 et des 1
 def decode_quartet (octetToDecode)
-	MATRICE_DECODAGE[octetToDecode]    
+	if (not MATRICE_ENCODAGE.include?(octetToDecode))
+		puts "Erreur detecté"
+	end
+	MATRICE_DECODAGE[octetToDecode & 0x7F]    
 end
