@@ -1,0 +1,8 @@
+Exemple
+
+Encodage : ruby commande.rb ENCODE <fichier_source> <fichier_emis>
+
+Insertion erreur : ruby commande.rb ERREUR <fichier_emis> <fichier_recu>
+
+Decodage  :  ruby commande.rb DECODE <fichier_recu> <fichier_decode>
+
